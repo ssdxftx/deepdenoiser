@@ -39,22 +39,18 @@ export default function AboutScreen() {
         </TouchableOpacity>
         <View style={theme.Styles.header}>
 
-          <Text style={theme.Styles.title}>About DeepDenoiser</Text>
-          <Text style={theme.Styles.subtitle}>Version {Constants.expoConfig?.version}</Text>
+          <Text style={theme.Styles.title}>关于 DeepDenoiser</Text>
+          <Text style={theme.Styles.subtitle}>版本 {Constants.expoConfig?.version}</Text>
         </View>
 
         <View style={[theme.Styles.card, styles.infoCard]}>
-          <Text style={styles.cardTitle}>What is DeepDenoiser?</Text>
+          <Text style={styles.cardTitle}>DeepDenoiser 是什么？</Text>
           <Text style={styles.cardText}>
-            DeepDenoiser is an open-source tool designed to make
-            professional-grade audio noise reduction accessible to everyone. It
-            uses state-of-the-art deep learning to isolate speech and remove
-            background noise in real-time from Video and Audio. Your files never
-            leave your device. Processing happens on your Device.
+            DeepDenoiser 是一款开源工具，致力于让每个人都能使用专业级的音频降噪功能。它采用前沿的深度学习技术，实时分离语音并去除视频和音频中的背景噪音。您的文件始终不会离开设备，全部处理都在本机完成。
           </Text>
         </View>
 
-        <Text style={styles.sectionTitle}>Connect</Text>
+        <Text style={styles.sectionTitle}>联系我们</Text>
         <View style={styles.linkContainer}>
           <TouchableOpacity
             style={[theme.Styles.button, styles.linkButton]}
@@ -62,7 +58,7 @@ export default function AboutScreen() {
           >
             <Feather name="github" size={20} color={theme.COLORS.background} />
             <Text style={[theme.Styles.buttonText, { marginLeft: 10 }]}>
-              GitHub Repo
+              GitHub 仓库
             </Text>
           </TouchableOpacity>
 
@@ -82,12 +78,12 @@ export default function AboutScreen() {
                 { marginLeft: 10 },
               ]}
             >
-              Donate Me
+              打赏支持
             </Text>
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.sectionTitle}>Legal</Text>
+        <Text style={styles.sectionTitle}>法律信息</Text>
         <View style={styles.linkContainer}>
           <TouchableOpacity
             style={[
@@ -105,7 +101,7 @@ export default function AboutScreen() {
                 { marginLeft: 10 },
               ]}
             >
-              Open Source Licenses
+              开源许可
             </Text>
           </TouchableOpacity>
         </View>
@@ -114,7 +110,7 @@ export default function AboutScreen() {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            Made with{" "}
+            由 Sayampy 用{" "}
             <Image
               source={require("@/assets/images/heart_india.png")}
               style={{
@@ -123,7 +119,7 @@ export default function AboutScreen() {
                 // marginTop: 5,
               }}
             />{" "}
-            by Sayampy
+            制作
           </Text>
         </View>
 

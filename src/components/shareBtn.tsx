@@ -18,11 +18,11 @@ const ShareBtn: React.FC<ShareBtnProps> = ({ uri }) => {
                 await Sharing.shareAsync(uri);
                 trackAppEvent("share_file");
             } else {
-                Alert.alert("Sharing not available", "The sharing service is not available on this device.");
+                Alert.alert("无法共享", "此设备不支持共享服务。");
             }
         } catch (error) {
             console.error("Failed to share file:", error);
-            Alert.alert("Share Failed", error instanceof Error ? error.message : "Could not share this file.");
+            Alert.alert("共享失败", error instanceof Error ? error.message : "无法共享此文件。");
         }
     };
 

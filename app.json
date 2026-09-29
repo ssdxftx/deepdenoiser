@@ -70,7 +70,7 @@
       [
         "expo-audio",
         {
-          "microphonePermission": "Allow DeepDenoiser to access your microphone for voice recording and denoising.",
+          "microphonePermission": "允许 DeepDenoiser 访问您的麦克风，用于语音录制和降噪。",
           "enableBackgroundRecording": true
         }
       ],

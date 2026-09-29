@@ -279,7 +279,7 @@ export default function RecordingScreen() {
   const startRecording = async () => {
     try {
       if (!denoiserReady) {
-        Alert.alert("Wait", "Denoiser is still initializing...");
+        Alert.alert("请稍候", "降噪器仍在初始化...");
         return;
       }
       trackAppEvent("start_recording");
@@ -436,7 +436,7 @@ export default function RecordingScreen() {
         >
           <Feather name="arrow-left" size={24} color={theme.COLORS.text} />
         </Pressable>
-        <Text style={styles.headerTitle}>Voice Recorder</Text>
+        <Text style={styles.headerTitle}>录音机</Text>
       </View>
 
       <ScrollView
@@ -468,28 +468,28 @@ export default function RecordingScreen() {
             <Host matchContents style={{ width: 48, height: 48 }} colorScheme="dark">
               <LoadingIndicator color={theme.COLORS.primary} />
             </Host>
-            <Text style={styles.statusText}>Finalizing Audio...</Text>
+            <Text style={styles.statusText}>正在生成音频...</Text>
           </View>
         ) : !finalOriginalWav ? (
           <View style={styles.controlsContainer}>
             <Text style={styles.statusText}>
               {!isRecording && !isPaused
-                ? "Ready to record"
+                ? "准备录音"
                 : isPaused
-                  ? "Recording paused"
-                  : "Denoising in Real-time"}
+                  ? "录音已暂停"
+                  : "实时降噪中"}
             </Text>
 
             {!isRecording && !isPaused ? (
               <View style={styles.sliderContainer}>
                 <CustomSlider
-                  label="Attenuation Limit"
+                  label="衰减限制"
                   value={attenLimDb}
                   onValueChange={setAttenLimDb}
                   min={0}
                   max={40}
                   steps={ALSTEPS}
-                  info={`Limits how aggressively the AI removes noise.\n0dB = most aggressive (quietest background).\n40dB = preserves nearly all ambient sound.\nStart at 0dB and increase if audio sounds too processed.`}
+                  info={`限制 AI 去除噪音的强度。\n0dB = 最强（背景最安静）。\n40dB = 几乎保留所有环境音。\n建议从 0dB 开始，若音频听起来过度处理再逐步调高。`}
                 />
 
                 <View style={styles.settingsDivider} />
@@ -517,7 +517,7 @@ export default function RecordingScreen() {
                 <View style={styles.recordButtonInner}>
                   <Feather name="mic" size={40} color={theme.COLORS.white} />
                 </View>
-                <Text style={styles.buttonLabel}>Tap to Start</Text>
+                <Text style={styles.buttonLabel}>点击开始</Text>
               </Pressable>
             ) : (
               <View style={styles.activeControls}>
@@ -575,17 +575,17 @@ export default function RecordingScreen() {
                   size={20}
                   color={theme.COLORS.subtext}
                 />
-                <Text style={styles.resultTitle}>Original Audio</Text>
+                <Text style={styles.resultTitle}>原始音频</Text>
               </View>
               <AudioPlayer
                 uri={finalOriginalWav.uri}
-                name="Original recording"
+                name="原始录音"
               />
               <View style={styles.resultActions}>
                 <SaveButton
                   file={finalOriginalWav}
-                  label="Save Original"
-                  savedLabel="Saved"
+                  label="保存原始"
+                  savedLabel="已保存"
                   albumName="DeepDenoiser/Recordings"
                   style={[theme.Styles.button, styles.saveSubButton]}
                   onError={(err) => {
@@ -618,18 +618,18 @@ export default function RecordingScreen() {
                 <Text
                   style={[styles.resultTitle, { color: theme.COLORS.success }]}
                 >
-                  Denoised Audio
+                  降噪音频
                 </Text>
               </View>
               <AudioPlayer
                 uri={finalDenoisedWav!.uri}
-                name="Denoised recording"
+                name="降噪录音"
               />
               <View style={styles.resultActions}>
                 <SaveButton
                   file={finalDenoisedWav}
-                  label="Save Denoised"
-                  savedLabel="Saved"
+                  label="保存降噪"
+                  savedLabel="已保存"
                   albumName="DeepDenoiser/Recordings"
                   style={[
                     theme.Styles.button,
@@ -664,7 +664,7 @@ export default function RecordingScreen() {
                   { color: theme.COLORS.primary },
                 ]}
               >
-                Record New
+                重新录制
               </Text>
             </TouchableOpacity>
           </View>

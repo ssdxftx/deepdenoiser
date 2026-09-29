@@ -81,13 +81,12 @@ export default function RootLayout() {
           color={COLORS.error}
           style={{ marginBottom: 20 }}
         />
-        <Text style={styles.permissionTitle}>Permissions Required</Text>
+        <Text style={styles.permissionTitle}>需要授予权限</Text>
         <Text style={styles.permissionSubtitle}>
-          DeepDenoiser needs access to your media library to import and save
-          audio files, and microphone access for voice recording and real-time denoising.
+          DeepDenoiser 需要访问您的媒体库以导入和保存音频文件，并需要麦克风权限用于语音录制和实时降噪。
         </Text>
         <TouchableOpacity style={Styles.button} onPress={handleRequestPermissions}>
-          <Text style={Styles.buttonText}>Grant Permissions</Text>
+          <Text style={Styles.buttonText}>授予权限</Text>
         </TouchableOpacity>
       </View>
     );

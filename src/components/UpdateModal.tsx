@@ -65,7 +65,7 @@ export default function UpdateModal() {
             setUpdateInfo({
               version: data.tag_name,
               url: apkAsset ? apkAsset.browser_download_url : '',
-              notes: data.body || 'No release notes provided.',
+              notes: data.body || '暂无更新说明。',
               published_at: data.published_at,
             });
             setVisible(true);
@@ -101,7 +101,7 @@ export default function UpdateModal() {
         if (Platform.OS === 'android') {
           await Sharing.shareAsync(asset.localUri, {
             mimeType: 'application/vnd.android.package-archive',
-            dialogTitle: 'Install DeepDenoiser Update',
+            dialogTitle: '安装 DeepDenoiser 更新',
           });
         }
       } else {
@@ -109,7 +109,7 @@ export default function UpdateModal() {
       }
     } catch (err) {
       console.error('Download failed:', err);
-      setError('Failed to download update. Please try again or download manually from GitHub.');
+      setError('下载更新失败。请重试，或从 GitHub 手动下载。');
     } finally {
       setDownloading(false);
     }
@@ -133,7 +133,7 @@ export default function UpdateModal() {
           <View style={styles.header}>
             <View style={styles.titleContainer}>
               <Feather name="arrow-up-circle" size={24} color={COLORS.primary} />
-              <Text style={styles.title}>Update Available</Text>
+              <Text style={styles.title}>有可用更新</Text>
             </View>
             {!downloading && (
               <TouchableOpacity onPress={() => setVisible(false)}>
@@ -144,11 +144,11 @@ export default function UpdateModal() {
 
           <View style={styles.content}>
             <Text style={styles.versionInfo}>
-              New version <Text style={styles.versionText}>{updateInfo?.version}</Text> is ready.
+              新版本 <Text style={styles.versionText}>{updateInfo?.version}</Text> 已就绪。
             </Text>
 
             <View style={styles.notesContainer}>
-              <Text style={styles.notesTitle}>What&apos;s New:</Text>
+              <Text style={styles.notesTitle}>更新内容：</Text>
               <ScrollView style={styles.notesScroll} nestedScrollEnabled>
                 <Text style={styles.notesText}>{updateInfo?.notes}</Text>
               </ScrollView>
@@ -168,7 +168,7 @@ export default function UpdateModal() {
                 <Host matchContents colorScheme="dark">
                   <LoadingIndicator color={COLORS.primary} />
                 </Host>
-                <Text style={styles.downloadingText}>Downloading update...</Text>
+                <Text style={styles.downloadingText}>正在下载更新...</Text>
               </View>
             ) : (
               <>
@@ -183,7 +183,7 @@ export default function UpdateModal() {
                   onPress={handleDownload}
                 >
                   <Text style={styles.primaryButtonText}>
-                    {isPlayStore ? 'Update from Play Store' : 'Download & Install'}
+                    {isPlayStore ? '从应用商店更新' : '下载并安装'}
                   </Text>
                 </TouchableOpacity>
               </>

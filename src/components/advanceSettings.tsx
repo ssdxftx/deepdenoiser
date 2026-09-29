@@ -76,7 +76,7 @@ export default function AdvanceSettings({
             color={theme.COLORS.primary}
             style={{ marginRight: 8 }}
           />
-          <Text style={styles.headerText}>Advanced Settings</Text>
+          <Text style={styles.headerText}>高级设置</Text>
         </View>
         <Feather
           name={isOpen ? "chevron-up" : "chevron-down"}
@@ -90,8 +90,8 @@ export default function AdvanceSettings({
           <View style={[styles.settingItem, { marginBottom: 10 }]}>
             <View style={styles.settingLabelRow}>
               <View style={theme.Styles.row}>
-                <Text style={styles.settingLabel}>Loudness Normalization</Text>
-                <InfoBubble text={`Boosts quiet audio so the AI can denoise it effectively.\nUse when recordings are too quiet or have inconsistent volume.\nSkip if speech is already at a comfortable listening level.`}>
+                <Text style={styles.settingLabel}>响度标准化</Text>
+                <InfoBubble text={`提升过小的音量，以便 AI 能有效降噪。\n当录音音量太小或忽大忽小时使用。\n若语音已经处于舒适的聆听音量，可跳过此项。`}>
                   <Feather name="help-circle" size={18} color={theme.COLORS.subtext} />
                 </InfoBubble>
               </View>
@@ -113,22 +113,22 @@ export default function AdvanceSettings({
           {normalize.toggle && (
             <View>
               <CustomSlider
-                label="Target RMS"
+                label="目标 RMS"
                 value={normalize.targetRMS}
                 onValueChange={handleTargetRMSChange}
                 min={-20}
                 max={-10}
                 decimalPlaces={0}
-                info={`Target loudness of the output.\n-14dB = recommended default.\n-20dB = quieter, more dynamic range.\n-10dB = louder, less headroom.`}
+                info={`输出音频的目标响度。\n-14dB = 推荐默认值。\n-20dB = 更安静，动态范围更大。\n-10dB = 更响亮，余量更小。`}
               />
               <CustomSlider
-                label="Peak Limit"
+                label="峰值限制"
                 value={normalize.maxPeakDb}
                 onValueChange={handleMaxPeakChange}
                 min={-10}
                 max={0}
                 decimalPlaces={0}
-                info={`Hard ceiling for the loudest peak.\n-1.0dB = safe default, prevents clipping.\n-10dB = conservative, lots of headroom.\n0dB = maximum loudness, risk of distortion.`}
+                info={`最大峰值音量的硬性上限。\n-1.0dB = 安全默认值，可防止削波。\n-10dB = 保守设置，留有充足余量。\n0dB = 最大音量，有失真风险。`}
               />
             </View>
           )}
@@ -136,13 +136,13 @@ export default function AdvanceSettings({
           <View style={{ height: 1, backgroundColor: "rgba(255, 255, 255, 0.05)", marginVertical: 15 }} />
 
           <CustomSlider
-            label="Attenuation Limit"
+            label="衰减限制"
             value={attenLimDb}
             onValueChange={onAttenLimDbChange}
             min={0}
             max={40}
             steps={ALSTEPS}
-            info={`Limits how aggressively the AI removes noise.\n0dB = most aggressive (quietest background).\n40dB = preserves nearly all ambient sound.\nStart at 0dB and increase if audio sounds too processed.`}
+            info={`限制 AI 去除噪音的强度。\n0dB = 最强（背景最安静）。\n40dB = 几乎保留所有环境音。\n建议从 0dB 开始，若音频听起来过度处理再逐步调高。`}
           />
 
           {showSilenceTrim && (

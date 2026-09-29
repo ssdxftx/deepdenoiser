@@ -167,7 +167,7 @@ export default function ProcessScreen() {
 
     setDenoising(true);
     setProgress(0);
-    setProgressText("Initializing...");
+    setProgressText("正在初始化...");
     setEta(null);
     setDenoisedFile(null);
     try {
@@ -184,9 +184,9 @@ export default function ProcessScreen() {
         pcmFile = cachedDecode.file;
         sampleRate = cachedDecode.sampleRate;
         trackAppEvent("denoise_decode_reused");
-        setProgressText("Reusing cached audio...");
+        setProgressText("正在复用缓存音频...");
       } else {
-        setProgressText("Extracting audio...");
+        setProgressText("正在提取音频...");
         const decoded = await decodeToPCMFile(
           originalFile,
           new fs.File(fs.Paths.cache, stagePcmPath("stage_dec")).uri,
@@ -203,7 +203,7 @@ export default function ProcessScreen() {
 
       let globalGain = 1.0;
       if (normalize.toggle) {
-        setProgressText("Analyzing loudness...");
+        setProgressText("正在分析响度...");
         let maxPeak = 0;
         let sumSquares = 0;
         let analyzedSamples = 0;
@@ -245,12 +245,12 @@ export default function ProcessScreen() {
       if (cachedDenoise) {
         denoisedPcmFile = cachedDenoise;
         trackAppEvent("denoise_model_reused");
-        setProgressText("Reusing denoised audio...");
+        setProgressText("正在复用降噪音频...");
       } else {
-        setProgressText("Optimizing AI model...");
+        setProgressText("正在优化 AI 模型...");
         const denoiser = await getDenoiser();
 
-        setProgressText("Removing noise...");
+        setProgressText("正在去除噪音...");
         setProgress(0);
         const model_startTime = Date.now();
 
@@ -316,7 +316,7 @@ export default function ProcessScreen() {
               const elapsed = (Date.now() - model_startTime) / 1000;
               const remaining = elapsed / (p / 100) - elapsed;
               if (remaining > 0 && Number.isFinite(remaining)) {
-                setEta(`${timeHandler(Math.ceil(remaining))} left`);
+                setEta(`剩余 ${timeHandler(Math.ceil(remaining))}`);
               }
             }
           },
@@ -350,7 +350,7 @@ export default function ProcessScreen() {
       }
 
       setEta(null);
-      setProgressText("Finalizing media...");
+      setProgressText("正在生成媒体文件...");
 
       const originalBase = filename.split(".").slice(0, -1).join(".");
       const wavResult = await PCMtoWav(denoisedPcmFile, 48000, effectiveSilenceTrim);
@@ -360,7 +360,7 @@ export default function ProcessScreen() {
         // is worth keeping in persistent storage (indexed by the cache).
         // The silence-trim offsets are passed through so the video track is
         // cut by the same window and stays in sync with the trimmed audio.
-        setProgressText("Merging audio with video...");
+        setProgressText("正在合并音频与视频...");
         const finalVideoFile = await mergeAudioVideo(originalFile, wavResult.file, {
           startUs: wavResult.trimStartUs,
           endUs: wavResult.trimEndUs,
@@ -429,7 +429,7 @@ export default function ProcessScreen() {
         <Host matchContents colorScheme="dark">
           <LoadingIndicator color={theme.COLORS.primary} />
         </Host>
-        <Text style={styles.loadingText}>Loading media...</Text>
+        <Text style={styles.loadingText}>正在加载媒体...</Text>
       </SafeAreaView>
     );
   }
@@ -446,7 +446,7 @@ export default function ProcessScreen() {
           <Feather name="arrow-left" size={24} color={theme.COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>
-          Denoise {isFileTypeVideo ? "Video" : "Audio"}
+          {isFileTypeVideo ? "视频降噪" : "音频降噪"}
         </Text>
       </View>
 
@@ -458,7 +458,7 @@ export default function ProcessScreen() {
         <View style={styles.sectionCard}>
           <View style={styles.sectionHeader}>
             <Feather name="file" size={16} color={theme.COLORS.subtext} />
-            <Text style={styles.sectionTitle}>Original File</Text>
+            <Text style={styles.sectionTitle}>原始文件</Text>
           </View>
           <View style={styles.playerWrapper}>
             {originalFile &&
@@ -505,7 +505,7 @@ export default function ProcessScreen() {
             <View style={styles.resultHeader}>
               <View style={styles.resultBadge}>
                 <Feather name="check" size={12} color={theme.COLORS.white} />
-                <Text style={styles.resultBadgeText}>Cleaned</Text>
+                <Text style={styles.resultBadgeText}>已清理</Text>
               </View>
               <View style={styles.timeStats}>
                 <Feather name="clock" size={14} color={theme.COLORS.subtext} />
@@ -526,7 +526,7 @@ export default function ProcessScreen() {
             <View style={styles.resultActions}>
               <SaveButton
                 file={denoisedFile}
-                label="Save to Gallery"
+                label="保存到相册"
                 style={styles.saveBtn}
                 onError={(err) => {
                   setError(err);
@@ -565,7 +565,7 @@ export default function ProcessScreen() {
               />
             )}
             <Text style={theme.Styles.buttonText}>
-              {denoising ? "Processing..." : "Start Deep Denoising"}
+              {denoising ? "处理中..." : "开始深度降噪"}
             </Text>
           </TouchableOpacity>
         ) : (
@@ -589,7 +589,7 @@ export default function ProcessScreen() {
                   { color: theme.COLORS.primary },
                 ]}
               >
-                Try Again
+                重试
               </Text>
             </TouchableOpacity>
 
@@ -603,7 +603,7 @@ export default function ProcessScreen() {
                 color={theme.COLORS.background}
                 style={{ marginRight: 10 }}
               />
-              <Text style={theme.Styles.buttonText}>New File</Text>
+              <Text style={theme.Styles.buttonText}>新文件</Text>
             </TouchableOpacity>
           </View>
         )}

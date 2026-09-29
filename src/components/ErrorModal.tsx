@@ -28,53 +28,53 @@ export default function ErrorModal({ visible, error, onClose }: ErrorModalProps)
     const stack = err.stack?.toLowerCase() || "";
     if (msg.includes("out of memory") || msg.includes("allocation failed") || stack.includes("outofmemory")) {
       return {
-        title: "Out of Memory",
-        description: "Your device ran out of RAM. This usually happens with very large files. Try closing other apps or processing a shorter clip.",
+        title: "内存不足",
+        description: "您的设备内存已耗尽，通常发生在处理超大文件时。请尝试关闭其他应用，或处理更短的音频片段。",
         icon: "cpu" as const,
       };
     }
     if (msg.includes("no audio track") || stack.includes("no audio track")) {
       return {
-        title: "No Audio Track Found",
-        description: "Make sure the file is not corrupted and has an audio track",
+        title: "未找到音频轨道",
+        description: "请确认文件未损坏且包含音频轨道",
         icon: "mic-off" as const,
       };
     }
     if (msg.includes("illegal character") || stack.includes("illegal character")) {
       return {
-        title: "Illegal Character in Filename",
-        description: "rename the file with a valid filename without any ascii symbols",
+        title: "文件名包含非法字符",
+        description: "请将文件重命名为不含任何 ASCII 符号的有效文件名",
         icon: "file" as const,
       };
     }
 
     if (msg.includes("decoder") || msg.includes("mediacodec") || msg.includes("transcode failed") || msg.includes("format")) {
       return {
-        title: "Media Decoding Failed",
-        description: "Your device's hardware (MediaCodec) couldn't process this file format or resolution. Try a different file format (like .mp3 or .mp4).",
+        title: "媒体解码失败",
+        description: "您设备的硬件（MediaCodec）无法处理该文件格式或分辨率。请尝试其他文件格式（如 .mp3 或 .mp4）。",
         icon: "video-off" as const,
       };
     }
 
     if (msg.includes("onnx") || msg.includes("session") || msg.includes("model")) {
       return {
-        title: "AI Model Error",
-        description: "The denoising model failed to initialize or run. This might be due to incompatible hardware acceleration.",
+        title: "AI 模型错误",
+        description: "降噪模型初始化或运行失败，可能是由于硬件加速不兼容导致的。",
         icon: "activity" as const,
       };
     }
 
     if (msg.includes("permission") && msg.includes("denied")) {
       return {
-        title: "Permission Denied",
-        description: "The app doesn't have permission to access your files. Please check your app settings.",
+        title: "权限被拒绝",
+        description: "应用没有访问您文件的权限。请检查应用设置。",
         icon: "lock" as const,
       };
     }
 
     return {
-      title: "Something Went Wrong",
-      description: "An unexpected error occurred during processing. See details below for more information.",
+      title: "出错了",
+      description: "处理过程中发生了意外错误。详情请查看下方信息。",
       icon: "alert-circle" as const,
     };
   };
@@ -89,9 +89,9 @@ export default function ErrorModal({ visible, error, onClose }: ErrorModalProps)
   const submitToGithub = () => {
     const title = encodeURIComponent(`[Bug]: ${interpretation.title}`);
     const body = encodeURIComponent(
-      `**Interpreted Error:**\n${interpretation.title}: ${interpretation.description}\n\n` +
-      `**Stack Trace:** (Paste Error Details)\n\n` +
-      `**Device Info:**\n(Please add your device model,RAM size and OS version here)`
+      `**错误解读：**\n${interpretation.title}: ${interpretation.description}\n\n` +
+      `**堆栈信息：**（粘贴错误详情）\n\n` +
+      `**设备信息：**\n（请在此填写您的设备型号、内存大小和系统版本）`
     );
     const url = `https://github.com/sayampy/deepdenoiser/issues/new?title=${title}&body=${body}`;
     Linking.openURL(url);
@@ -120,7 +120,7 @@ export default function ErrorModal({ visible, error, onClose }: ErrorModalProps)
             onPress={() => setShowDetails(!showDetails)}
           >
             <Text style={styles.detailsToggleText}>
-              {showDetails ? "Hide technical details" : "Show technical details"}
+              {showDetails ? "隐藏技术详情" : "显示技术详情"}
             </Text>
             <Feather
               name={showDetails ? "chevron-up" : "chevron-down"}
@@ -144,18 +144,18 @@ export default function ErrorModal({ visible, error, onClose }: ErrorModalProps)
 
           <TouchableOpacity style={styles.copyButton} onPress={copyToClipboard}>
             <Feather name="copy" size={16} color={theme.COLORS.primary} />
-            <Text style={styles.copyButtonText}>Copy Error Details</Text>
+            <Text style={styles.copyButtonText}>复制错误详情</Text>
           </TouchableOpacity>
 
           <View style={styles.divider} />
 
           <Text style={styles.githubHint}>
-            If you think it is a problem in the app, not your device:
+            如果您认为这是应用本身的问题，而非设备问题：
           </Text>
 
           <TouchableOpacity style={styles.githubButton} onPress={submitToGithub}>
             <Feather name="github" size={20} color={theme.COLORS.background} />
-            <Text style={styles.githubButtonText}>Report on GitHub</Text>
+            <Text style={styles.githubButtonText}>在 GitHub 上反馈</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -167,7 +167,7 @@ export default function ErrorModal({ visible, error, onClose }: ErrorModalProps)
             onPress={onClose}
           >
             <Text style={[theme.Styles.buttonText, theme.Styles.buttonTextSecondary]}>
-              Close
+              关闭
             </Text>
           </TouchableOpacity>
         </View>

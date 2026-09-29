@@ -81,12 +81,12 @@ export default function ShareHandler() {
       </Host>
       <Text style={styles.loadingText}>
         {isResolving
-          ? "Preparing shared file..."
+          ? "正在准备共享文件..."
           : isCopying
-            ? "Copying shared file..."
-            : "Redirecting..."}
+            ? "正在复制共享文件..."
+            : "正在跳转..."}
       </Text>
-      {shareError && <Text style={styles.errorText}>Error: {shareError.message}</Text>}
+      {shareError && <Text style={styles.errorText}>错误：{shareError.message}</Text>}
 
       <ErrorModal
         visible={isErrorModalVisible}

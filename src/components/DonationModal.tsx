@@ -33,7 +33,7 @@ export default function DonationModal({ visible, onClose }: DonationModalProps) 
           style={styles.modalContent}
           onPress={(e) => e.stopPropagation()}
         >
-          <Text style={styles.modalTitle}>Support Development</Text>
+          <Text style={styles.modalTitle}>支持开发</Text>
 
           <TouchableOpacity
             style={styles.donationButton}
@@ -56,7 +56,7 @@ export default function DonationModal({ visible, onClose }: DonationModalProps) 
               color="white"
               style={styles.githubIcon}
             />
-            <Text style={styles.githubText}>Sponsor on GitHub</Text>
+            <Text style={styles.githubText}>在 GitHub 上赞助</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -70,7 +70,7 @@ export default function DonationModal({ visible, onClose }: DonationModalProps) 
               contentFit="contain"
               style={styles.upiIcon}
             />
-            <Text style={styles.upiText}>Donate via UPI</Text>
+            <Text style={styles.upiText}>通过 UPI 捐赠</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -87,7 +87,7 @@ export default function DonationModal({ visible, onClose }: DonationModalProps) 
                 theme.Styles.buttonTextSecondary,
               ]}
             >
-              Close
+              关闭
             </Text>
           </TouchableOpacity>
         </Pressable>

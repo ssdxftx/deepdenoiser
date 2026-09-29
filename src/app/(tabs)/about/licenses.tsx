@@ -63,7 +63,7 @@ export default function LicensesScreen() {
             style={styles.repoLink}
           >
             <Feather name="github" size={14} color={theme.COLORS.primary} />
-            <Text style={styles.repoText}>Source</Text>
+            <Text style={styles.repoText}>源码</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -79,7 +79,7 @@ export default function LicensesScreen() {
         >
           <Feather name="arrow-left" size={24} color={theme.COLORS.text} />
         </TouchableOpacity>
-        <Text style={theme.Styles.title}>Licenses</Text>
+        <Text style={theme.Styles.title}>开源许可</Text>
       </View>
 
       <View style={styles.searchContainer}>
@@ -100,7 +100,7 @@ export default function LicensesScreen() {
             }}
           >
             <OutlinedTextField.Placeholder>
-              Search libraries...
+              搜索库...
             </OutlinedTextField.Placeholder>
           </OutlinedTextField>
         </Host>

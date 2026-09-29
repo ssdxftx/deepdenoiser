@@ -17,8 +17,8 @@ interface SaveButtonProps {
 
 export default function SaveButton({
   file,
-  label = "Save to Gallery",
-  savedLabel = "Saved",
+  label = "保存到相册",
+  savedLabel = "已保存",
   albumName,
   style,
   savedBg,
@@ -30,7 +30,7 @@ export default function SaveButton({
     if (!file) return;
     const success = await saveToDevice(file, albumName);
     if (!success) {
-      onError?.(new Error("Media library access is required to save files. Grant storage permission in Settings."));
+      onError?.(new Error("保存文件需要访问媒体库权限。请在系统设置中授予存储权限。"));
       return;
     }
     setSaved(true);

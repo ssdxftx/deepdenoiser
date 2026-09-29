@@ -29,7 +29,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "首页",
           tabBarIcon: ({ color, size }) => (
             <Feather name="home" color={color} size={size} />
           ),
@@ -38,7 +38,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="about"
         options={{
-          title: "About",
+          title: "关于",
           tabBarIcon: ({ color, size }) => (
             <Feather name="info" color={color} size={size} />
           ),

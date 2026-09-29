@@ -62,14 +62,14 @@ export default function DonationReminderModal({
               <Feather name="heart" size={28} color={theme.COLORS.primary} />
             </View>
 
-            <Text style={styles.modalTitle}>Support the Project</Text>
+            <Text style={styles.modalTitle}>支持本项目</Text>
             <Text style={styles.modalSubtitle}>
-              Keep it open-source and ad-free forever
+              让项目永久开源且无广告
             </Text>
 
             <View style={styles.quoteContainer}>
               <Text style={styles.quoteText}>
-                Even a modest donation goes a long way toward keeping this project alive and actively maintained.
+                即使是一份小小的心意，也能让这个项目持续存续并保持活跃维护。
               </Text>
             </View>
 
@@ -79,11 +79,11 @@ export default function DonationReminderModal({
                 size={20}
                 color={theme.COLORS.background}
               />
-              <Text style={styles.donateButtonText}>Buy Me a Coffee</Text>
+              <Text style={styles.donateButtonText}>请我喝杯咖啡</Text>
             </TouchableOpacity>
 
             <View style={styles.neverAgainRow}>
-              <Text style={styles.neverAgainText}>Never show again</Text>
+              <Text style={styles.neverAgainText}>不再显示</Text>
               <Host matchContents style={{ width: 52, height: 32 }} colorScheme="dark">
                 <Switch
                   value={neverAgain}
@@ -103,7 +103,7 @@ export default function DonationReminderModal({
 
       <RoastToast
         visible={showRoast}
-        message="May you be drowning in money in future 💸"
+        message="祝你以后财源滚滚 💸"
         onHide={() => setShowRoast(false)}
       />
     </>

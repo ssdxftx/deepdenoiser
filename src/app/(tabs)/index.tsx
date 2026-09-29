@@ -137,7 +137,7 @@ export default function HomeScreen() {
 
   const handleProceed = () => {
     if (!tempFile) {
-      Alert.alert("No File", "Please import a file before proceeding.");
+      Alert.alert("未选择文件", "请先导入文件再继续。");
       return;
     }
     router.push({
@@ -162,7 +162,7 @@ export default function HomeScreen() {
           />
           <Text style={theme.Styles.title}>DeepDenoiser</Text>
           <Text style={theme.Styles.subtitle}>
-            Remove background noise from your audio and video using DeepFilterNet 3
+            使用 DeepFilterNet 3 去除音频和视频中的背景噪音
           </Text>
         </View>
 
@@ -181,9 +181,9 @@ export default function HomeScreen() {
                   />
                 </View>
                 <View style={styles.actionTextContainer}>
-                  <Text style={styles.actionTitle}>Import File</Text>
+                  <Text style={styles.actionTitle}>导入文件</Text>
                   <Text style={styles.actionSubtitle}>
-                    Audio or Video from your device
+                    从设备中选择音频或视频
                   </Text>
                 </View>
                 <Feather name="chevron-right" size={20} color={theme.COLORS.border} />
@@ -201,9 +201,9 @@ export default function HomeScreen() {
                   />
                 </View>
                 <View style={styles.actionTextContainer}>
-                  <Text style={[styles.actionTitle, { color: theme.COLORS.error }]}>Record Voice</Text>
+                  <Text style={[styles.actionTitle, { color: theme.COLORS.error }]}>录制语音</Text>
                   <Text style={styles.actionSubtitle}>
-                    Real-time denoising for recordings
+                    录音实时降噪
                   </Text>
                 </View>
                 <Feather name="chevron-right" size={20} color={theme.COLORS.border} />
@@ -219,13 +219,13 @@ export default function HomeScreen() {
           ) : (
             <View style={styles.previewContainer}>
               <View style={styles.previewHeader}>
-                <Text style={styles.previewTitle}>Selected File</Text>
+                <Text style={styles.previewTitle}>已选文件</Text>
                 <TouchableOpacity
                   onPress={() => setTempFile(null)}
                   style={styles.removeBadge}
                 >
                   <Feather name="x" size={14} color={theme.COLORS.white} />
-                  <Text style={styles.removeBadgeText}>Remove</Text>
+                  <Text style={styles.removeBadgeText}>移除</Text>
                 </TouchableOpacity>
               </View>
 
@@ -246,7 +246,7 @@ export default function HomeScreen() {
               <Host matchContents colorScheme="dark">
                 <LoadingIndicator color={theme.COLORS.primary} />
               </Host>
-              <Text style={styles.loaderText}>Processing asset...</Text>
+              <Text style={styles.loaderText}>正在处理文件...</Text>
             </View>
           )}
         </View>
@@ -262,7 +262,7 @@ export default function HomeScreen() {
           onPress={handleProceed}
           disabled={!tempFile || isLoading}
         >
-          <Text style={theme.Styles.buttonText}>Proceed to Denoise</Text>
+          <Text style={theme.Styles.buttonText}>开始降噪</Text>
           <Feather
             name="arrow-right"
             size={20}

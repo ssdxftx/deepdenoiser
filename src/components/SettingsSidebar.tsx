@@ -55,20 +55,20 @@ export default function SettingsSidebar({ visible, onClose }: SettingsSidebarPro
         <Pressable style={styles.overlay} onPress={onClose} />
         <View style={styles.sidebar}>
           <View style={styles.header}>
-            <Text style={styles.title}>Settings</Text>
+            <Text style={styles.title}>设置</Text>
             <TouchableOpacity onPress={onClose}>
               <Feather name="x" size={24} color={theme.COLORS.text} />
             </TouchableOpacity>
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Privacy & Analytics</Text>
+            <Text style={styles.sectionTitle}>隐私与分析</Text>
 
             <View style={styles.settingItem}>
               <View style={styles.settingTextContainer}>
-                <Text style={styles.settingLabel}>Anonymous Analytics</Text>
+                <Text style={styles.settingLabel}>匿名分析</Text>
                 <Text style={styles.settingDescription}>
-                  Help us improve by sharing anonymous usage data.
+                  分享匿名使用数据，帮助我们改进应用。
                 </Text>
               </View>
               <Host matchContents style={{ width: 52, height: 32 }} colorScheme="dark">
@@ -87,9 +87,9 @@ export default function SettingsSidebar({ visible, onClose }: SettingsSidebarPro
 
             <View style={styles.settingItem}>
               <View style={styles.settingTextContainer}>
-                <Text style={styles.settingLabel}>Crash Reports</Text>
+                <Text style={styles.settingLabel}>崩溃报告</Text>
                 <Text style={styles.settingDescription}>
-                  Automatically send reports to help us fix bugs.
+                  自动发送报告，帮助我们修复问题。
                 </Text>
               </View>
               <Host matchContents style={{ width: 52, height: 32 }} colorScheme="dark">
@@ -108,9 +108,9 @@ export default function SettingsSidebar({ visible, onClose }: SettingsSidebarPro
 
             <View style={styles.settingItem}>
               <View style={styles.settingTextContainer}>
-                <Text style={styles.settingLabel}>Check for Updates</Text>
+                <Text style={styles.settingLabel}>检查更新</Text>
                 <Text style={styles.settingDescription}>
-                  Automatically check for new versions on startup.
+                  启动时自动检查新版本。
                 </Text>
               </View>
               <Host matchContents style={{ width: 52, height: 32 }} colorScheme="dark">
@@ -129,7 +129,7 @@ export default function SettingsSidebar({ visible, onClose }: SettingsSidebarPro
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.version}>Version {Constants.expoConfig?.version}</Text>
+            <Text style={styles.version}>版本 {Constants.expoConfig?.version}</Text>
           </View>
         </View>
       </View>

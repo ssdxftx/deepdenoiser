@@ -31,12 +31,12 @@ export default function SilenceTrimSettings({
       <View style={[styles.settingItem, { marginBottom: 10 }]}>
         <View style={styles.settingLabelRow}>
           <View style={theme.Styles.row}>
-            <Text style={styles.settingLabel}>Trim Silence</Text>
+            <Text style={styles.settingLabel}>裁剪静音</Text>
             <View style={styles.betaTag}>
-              <Text style={styles.betaText}>BETA</Text>
+              <Text style={styles.betaText}>测试版</Text>
             </View>
             <InfoBubble
-              text={`Removes quiet pauses from the denoised audio, which shortens the duration.\n\nAuto: analyzes the audio and picks a threshold.\nManual: you set the threshold and minimum pause length.\n\nOnly pauses that are quiet enough AND long enough are removed.`}
+              text={`从降噪后的音频中移除安静的停顿，从而缩短时长。\n\n自动：分析音频并自动选取阈值。\n手动：由您设置阈值和最短停顿时长。\n\n只有既足够安静又足够长的停顿才会被移除。`}
             >
               <Feather
                 name="help-circle"
@@ -77,7 +77,7 @@ export default function SilenceTrimSettings({
                   settings.mode === "auto" && styles.modeTextActive,
                 ]}
               >
-                Auto
+                自动
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -94,7 +94,7 @@ export default function SilenceTrimSettings({
                   settings.mode === "manual" && styles.modeTextActive,
                 ]}
               >
-                Manual
+                手动
               </Text>
             </TouchableOpacity>
           </View>
@@ -102,7 +102,7 @@ export default function SilenceTrimSettings({
           {settings.mode === "manual" && (
             <View>
               <CustomSlider
-                label="Silence Threshold"
+                label="静音阈值"
                 value={settings.thresholdDb}
                 onValueChange={(value) =>
                   onChange({ ...settings, thresholdDb: value })
@@ -110,10 +110,10 @@ export default function SilenceTrimSettings({
                 min={-60}
                 max={-20}
                 steps={THRESHOLD_STEPS}
-                info={`How quiet a section must be to count as silence. Higher = more aggressive.`}
+                info={`一段音频需要多安静才会被视为静音。越高越激进。`}
               />
               <CustomSlider
-                label="Min Pause Length"
+                label="最短停顿长度"
                 value={settings.minSilenceMs}
                 onValueChange={(value) =>
                   onChange({ ...settings, minSilenceMs: value })
@@ -122,7 +122,7 @@ export default function SilenceTrimSettings({
                 max={2000}
                 steps={MIN_PAUSE_STEPS}
                 unit="ms"
-                info={`Only silences longer than this are removed.\n\n500ms = recommended (natural pauses are shorter — longer ones are hesitations).\n200-400ms = removes more.\n800ms+ = removes only long pauses.`}
+                info={`只有超过此时长的静音才会被移除。\n\n500ms = 推荐值（自然停顿更短，更长的多为犹豫）。\n200-400ms = 移除更多。\n800ms 以上 = 仅移除长停顿。`}
               />
             </View>
           )}
