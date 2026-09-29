@@ -10,7 +10,7 @@ on:
       build_type:
         description: Build type
         required: true
-        default: debug
+        default: release-apk
         type: choice
         options:
           - debug
@@ -39,10 +39,22 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Setup NDK
-        uses: nttld/setup-ndk@v1.6
-        with:
-          ndk-version: r28b
+      - name: Setup Android SDK
+        run: |
+          set -euo pipefail
+          SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+          SDKMANAGER="$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then
+            SDKMANAGER="$(ls -d "$SDK_ROOT"/cmdline-tools/*/bin/sdkmanager 2>/dev/null | head -1)"
+          fi
+          echo "Using sdkmanager: $SDKMANAGER"
+          yes | "$SDKMANAGER" --licenses > /dev/null 2>&1 || true
+          "$SDKMANAGER" \
+            "platform-tools" \
+            "platforms;android-36" \
+            "build-tools;36.0.0" \
+            "ndk;28.1.13356709" \
+            "cmake;3.22.1"
 
       - name: Install dependencies
         run: bun install
@@ -50,39 +62,31 @@ jobs:
       - name: Prebuild Android
         run: bunx expo prebuild --platform android --no-install
 
-      - name: Install EAS CLI
-        run: bun install -g eas-cli
-
-      - name: Build with EAS local
-        env:
-          EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
+      - name: Build
+        working-directory: android
         run: |
           set -euo pipefail
-
           case "${{ inputs.build_type }}" in
-            debug)
-              PROFILE=development
-              ;;
-            release-apk)
-              PROFILE=production
-              ;;
-            release-aab)
-              PROFILE=playstore
-              ;;
+            debug)       TASK=assembleDebug ;;
+            release-apk) TASK=assembleRelease ;;
+            release-aab) TASK=bundleRelease ;;
             *)
               echo "Unknown build type: ${{ inputs.build_type }}"
               exit 1
               ;;
           esac
+          ./gradlew "$TASK" --no-daemon --max-workers=2 -PreactNativeArchitectures=arm64-v8a
 
-          eas build --platform android --profile "$PROFILE" --local
+      - name: Show built artifacts
+        run: |
+          find android/app/build/outputs -type f \( -name '*.apk' -o -name '*.aab' \) -printf '%p (%s bytes)\n' || true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
           name: android-${{ inputs.build_type }}
           path: |
-            ~/**/*.apk
-            ~/**/*.aab
+            android/app/build/outputs/apk/**/*.apk
+            android/app/build/outputs/bundle/**/*.aab
           archive: false
           if-no-files-found: error
